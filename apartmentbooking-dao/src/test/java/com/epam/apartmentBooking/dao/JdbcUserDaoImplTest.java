@@ -21,7 +21,7 @@ public class JdbcUserDaoImplTest extends EntityDaoImplTest {
 	private static final String PASSWORD = "";
 
 	@Autowired
-	IUserDao iUserDao;
+	IUserDao userDao;
 
 	@Override
 	protected IDataSet getDataSet() throws Exception {
@@ -36,38 +36,40 @@ public class JdbcUserDaoImplTest extends EntityDaoImplTest {
 
 	@Test
 	public void getUserByIdTest() {
-		Assert.assertNotNull(iUserDao.findById(2));
-		Assert.assertEquals(iUserDao.findById(3).getName(), "Sergei");
-		Assert.assertEquals(iUserDao.findById(3).getSurname(), "Terton");
+		Assert.assertNotNull(userDao.findById(2));
 	}
 
 	@Test
 	public void findAllUserTest() {
-		Assert.assertEquals(iUserDao.findAll().size(), 2);
+		Assert.assertEquals(userDao.findAll().size(), 2);
 	}
 
 	@Test
 	public void deleteUserByIdTest() {
-		iUserDao.delete((long) 2);
-		Assert.assertEquals(iUserDao.findAll().size(), 1);
+		userDao.delete((long) 2);
+		Assert.assertEquals(userDao.findAll().size(), 1);
 	}
 
 	@Test
 	public void insertUserTest() {
-		iUserDao.create(getSampleUser(5, "Test", "Surname", "Test@mail.ru", "TestPassword"));
-		Assert.assertEquals(iUserDao.findAll().size(), 3);
+		userDao.create(getSampleUser(5, "Test", "Surname", "Test@mail.ru", "TestPassword"));
+		Assert.assertEquals(userDao.findAll().size(), 3);
 	}
 
 	@Test
 	public void updateUserTest() {
-		iUserDao.update(getSampleUser(3, "UpdateName", "UpdateSurname", "UpdateTest@mail.ru", "UpdateTestPassword"));
-		Assert.assertEquals(iUserDao.findById(3).getName(), "UpdateName");
+		userDao.update(getSampleUser(3, "UpdateName", "UpdateSurname", "UpdateTest@mail.ru", "UpdateTestPassword"));
+		Assert.assertEquals(userDao.findById(3).getName(), "UpdateName");
 	}
 
 	@Test
 	public void checkUserTest() {
-		Assert.assertNotNull(iUserDao.checkUser(getSampleUser(2, "Anton", "Zaleski", "Zaleski@mail.ru", "11111111")));
-		// Assert.assertNull(iUserDao.checkUser(getSampleUser(2,"Anton","Zaleski","Zaleski@mail.ru","111111111")));
+		Assert.assertTrue(userDao.checkUser(getSampleUser(2, "Anton", "Zaleski", "Zaleski@mail.ru", "11111111")));
+	}
+
+	@Test
+	public void checkEmailTest() {
+		Assert.assertTrue(userDao.checkUser(getSampleUser(2, "Anton", "Zaleski", "Zaleski@mail.ru", "11111111")));
 	}
 
 	public User getSampleUser(long id, String name, String surname, String email, String password) {

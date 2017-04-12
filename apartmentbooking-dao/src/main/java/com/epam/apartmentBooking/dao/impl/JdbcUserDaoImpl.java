@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.epam.apartmentBooking.dao.IUserDao;
@@ -23,7 +21,8 @@ public class JdbcUserDaoImpl implements IUserDao {
 	private static final String SQL_QUERY_DELETE_USER = "delete from USERS where USER_ID = :USER_ID";
 	private static final String SQL_QUERY_UPDATE_USER = "update USERS set USER_NAME = :USER_NAME,USER_SURNAME = :USER_SURNAME,USER_EMAIL = :USER_EMAIL,USER_PASSWORD = :USER_PASSWORD where USER_ID = :USER_ID";
 	private static final String SQL_QUERY_FIND_USER_BY_ID = "select * from USERS where USER_ID = :USER_ID";
-	private static final String SQL_QUERY_CHECK_USER = "select * from USERS where USER_EMAIL = :USER_EMAIL and USER_PASSWORD = :USER_PASSWORD";
+	private static final String SQL_QUERY_CHECK_USER = "select COUNT(*) from USERS where USER_EMAIL = :USER_EMAIL and USER_PASSWORD = :USER_PASSWORD";
+	private static final String SQL_QUERY_CHECK_EMAIL = "select COUNT(*) from USERS where USER_EMAIL = :USER_EMAIL";
 
 	private NamedParameterJdbcOperations namedParameterJdbcTemplate;
 
@@ -40,22 +39,19 @@ public class JdbcUserDaoImpl implements IUserDao {
 
 	@Override
 	public long create(User user) {
-		KeyHolder keyHolder = new GeneratedKeyHolder();
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("USER_NAME", user.getName());
 		params.addValue("USER_SURNAME", user.getSurname());
 		params.addValue("USER_EMAIL", user.getEmail());
 		params.addValue("USER_PASSWORD", user.getPassword());
-		namedParameterJdbcTemplate.update(SQL_QUERY_INSERT_USER, params);
-		return 1;
+		return namedParameterJdbcTemplate.update(SQL_QUERY_INSERT_USER, params);
 	}
 
 	@Override
-	public boolean delete(Long id) {
+	public void delete(Long id) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("USER_ID", id);
 		namedParameterJdbcTemplate.update(SQL_QUERY_DELETE_USER, params);
-		return true;
 	}
 
 	@Override
@@ -66,16 +62,22 @@ public class JdbcUserDaoImpl implements IUserDao {
 		params.addValue("USER_SURNAME", user.getSurname());
 		params.addValue("USER_EMAIL", user.getEmail());
 		params.addValue("USER_PASSWORD", user.getPassword());
-		namedParameterJdbcTemplate.update(SQL_QUERY_UPDATE_USER, params);
-		return 1;
+		return namedParameterJdbcTemplate.update(SQL_QUERY_UPDATE_USER, params);
 	}
 
 	@Override
-	public User checkUser(User user) {
+	public boolean checkUser(User user) {
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("USER_EMAIL", user.getEmail());
 		params.addValue("USER_PASSWORD", user.getPassword());
-		return namedParameterJdbcTemplate.queryForObject(SQL_QUERY_CHECK_USER, params, new UserRowMapper());
+		return namedParameterJdbcTemplate.queryForObject(SQL_QUERY_CHECK_USER, params, Boolean.class);
+	}
+
+	@Override
+	public boolean checkEmail(User user) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("USER_EMAIL", user.getEmail());
+		return namedParameterJdbcTemplate.queryForObject(SQL_QUERY_CHECK_EMAIL, params, Boolean.class);
 	}
 
 	@Override

@@ -25,6 +25,7 @@
 	<modules>
 		<module>apartmentbooking-model</module>
 		<module>apartmentbooking-dao</module>
+		<module>apartmentbooking-service</module>
 	</modules>
 
 	<build>
