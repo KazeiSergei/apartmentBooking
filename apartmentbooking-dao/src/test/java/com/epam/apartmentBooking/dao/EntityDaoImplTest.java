@@ -1,29 +1,28 @@
 package com.epam.apartmentBooking.dao;
 
-import javax.sql.DataSource;
-
+import com.epam.apartmentBooking.configuration.BeenConfigTest;
 import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.operation.DatabaseOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 
-import com.epam.apartmentBooking.configuration.BeenConfigTest;
+import javax.sql.DataSource;
 
 @ContextConfiguration(classes = { BeenConfigTest.class })
-public abstract class EntityDaoImplTest extends AbstractTestNGSpringContextTests {
+public abstract class EntityDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
-	@Autowired
-	DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
-	@BeforeMethod
-	public void setUp() throws Exception {
-		IDatabaseConnection dbConn = new DatabaseDataSourceConnection(dataSource);
-		DatabaseOperation.CLEAN_INSERT.execute(dbConn, getDataSet());
-	}
+    @BeforeMethod
+    public void setUp() throws Exception {
+        IDatabaseConnection dbConn = new DatabaseDataSourceConnection(dataSource);
+        DatabaseOperation.CLEAN_INSERT.execute(dbConn, getDataSet());
+    }
 
-	protected abstract IDataSet getDataSet() throws Exception;
+    protected abstract IDataSet getDataSet() throws Exception;
 }

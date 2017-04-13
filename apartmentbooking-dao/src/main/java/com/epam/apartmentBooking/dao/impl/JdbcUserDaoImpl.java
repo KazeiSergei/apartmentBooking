@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.epam.apartmentBooking.dao.IUserDao;
 import com.epam.apartmentBooking.model.User;
 
-@Repository("jdbcUserDao")
+@Repository("userDao")
 public class JdbcUserDaoImpl implements IUserDao {
 
 	private static final String SQL_QUERY_FIND_ALL_USER = "select USER_ID,USER_NAME,USER_SURNAME,USER_EMAIL,USER_PASSWORD from USERS";
@@ -23,6 +24,7 @@ public class JdbcUserDaoImpl implements IUserDao {
 	private static final String SQL_QUERY_FIND_USER_BY_ID = "select * from USERS where USER_ID = :USER_ID";
 	private static final String SQL_QUERY_CHECK_USER = "select COUNT(*) from USERS where USER_EMAIL = :USER_EMAIL and USER_PASSWORD = :USER_PASSWORD";
 	private static final String SQL_QUERY_CHECK_EMAIL = "select COUNT(*) from USERS where USER_EMAIL = :USER_EMAIL";
+	private static final String SQL_QUERY_FIND_USER_BY_EMAIL = "select * from USERS where USER_EMAIL = :USER_EMAIL";
 
 	private NamedParameterJdbcOperations namedParameterJdbcTemplate;
 
@@ -87,6 +89,18 @@ public class JdbcUserDaoImpl implements IUserDao {
 		return namedParameterJdbcTemplate.queryForObject(SQL_QUERY_FIND_USER_BY_ID, params, new UserRowMapper());
 	}
 
+	@Override
+	public User findUserByEmail(User user) {
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("USER_EMAIL", user.getEmail());
+		try {
+			user = namedParameterJdbcTemplate.queryForObject(SQL_QUERY_FIND_USER_BY_EMAIL, params, new UserRowMapper());
+		} catch (DataAccessException e) {
+			user = null;
+		}
+		return user;
+	}
+
 	private static final class UserRowMapper implements RowMapper<User> {
 		@Override
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -97,7 +111,6 @@ public class JdbcUserDaoImpl implements IUserDao {
 			user.setEmail(rs.getString("USER_EMAIL"));
 			user.setPassword(rs.getString("USER_PASSWORD"));
 			return user;
-
 		}
 
 	}
