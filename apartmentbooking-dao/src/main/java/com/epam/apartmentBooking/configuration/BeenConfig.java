@@ -9,11 +9,14 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
 
 @Configuration
+@EnableTransactionManagement
 @ComponentScan("com.epam.apartmentBooking")
 @PropertySource(value = {"classpath:application.properties"})
 public class BeenConfig {
@@ -31,7 +34,6 @@ public class BeenConfig {
         basicDataSource.setInitialSize(20);
         basicDataSource.setMaxActive(30);
         return basicDataSource;
-
     }
 
     @Bean(name = "namedParameterJdbcTemplate")
@@ -39,4 +41,10 @@ public class BeenConfig {
         return new NamedParameterJdbcTemplate(dataSource());
     }
 
+    @Bean
+    public DataSourceTransactionManager dataSourceTransactionManager() {
+        return new DataSourceTransactionManager(dataSource());
+    }
+
 }
+
