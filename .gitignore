@@ -1,6 +1,9 @@
 ~*
 
 *.class
+.project
+.setting
+
 
 # Package Files #
 *.jar
@@ -18,3 +21,5 @@
 *.ids
 .idea
 target
+test-output
+.setting
