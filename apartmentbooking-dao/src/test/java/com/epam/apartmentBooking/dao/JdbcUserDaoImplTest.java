@@ -12,7 +12,7 @@ import com.epam.apartmentBooking.model.User;
 public class JdbcUserDaoImplTest extends EntityDaoImplTest {
 
 	@Autowired
-	IUserDao userDao;
+	private IUserDao userDao;
 
 	@Override
 	protected IDataSet getDataSet() throws Exception {

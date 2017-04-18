@@ -9,13 +9,13 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.operation.DatabaseOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 
 import com.epam.apartmentBooking.configuration.BeenConfigTest;
 
 @ContextConfiguration(classes = { BeenConfigTest.class })
-public abstract class EntityDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
+public abstract class EntityDaoImplTest extends AbstractTestNGSpringContextTests {
 
 	@Autowired
 	private DataSource dataSource;

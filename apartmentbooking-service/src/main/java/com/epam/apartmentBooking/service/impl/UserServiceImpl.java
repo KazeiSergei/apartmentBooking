@@ -1,5 +1,7 @@
 package com.epam.apartmentBooking.service.impl;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -49,6 +51,24 @@ public class UserServiceImpl implements IUserService {
 		user.setPassword(DigestUtils.md2Hex(password));
 		userDao.create(user);
 		return userDao.findUserByEmail(user);
+	}
+
+	public User editPassword(User user, String newPassword) {
+		if (!userDao.checkUser(user)) {
+			return null;
+		}
+		user.setPassword(DigestUtils.md2Hex(newPassword));
+		userDao.update(user);
+		return user;
+	}
+
+	public boolean restorePassword(User user) {
+		if (!userDao.checkEmail(user)) {
+			return false;
+		}
+		user.setPassword(DigestUtils.md2Hex(new BigInteger(50, new SecureRandom()).toString(32)));
+		userDao.update(user);
+		return true;
 	}
 
 }

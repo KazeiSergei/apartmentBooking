@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class JdbcCityDaoImplTest extends EntityDaoImplTest {
 
 	@Autowired
-	ICityDao cityDao;
+	private ICityDao cityDao;
 
 	@Override
 	protected IDataSet getDataSet() throws Exception {

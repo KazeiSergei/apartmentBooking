@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <apartments AP_ID="1" AP_NAME="Test2" AP_DESCRIPTION="Bad apartment" AP_GUEST_COUNT="5" AP_COST_PER_DAY="45" AP_APARTMENT_TYPE_ID="2" AP_CITY_ID="2" />
-    <apartments AP_ID="2" AP_NAME="Test1" AP_DESCRIPTION="Good apartment" AP_GUEST_COUNT="3" AP_COST_PER_DAY="35" AP_APARTMENT_TYPE_ID="1" AP_CITY_ID="1" />
+    <apartments AP_ID="1" AP_NAME="Test2" AP_DESCRIPTION="Bad apartment" AP_GUEST_COUNT="5" AP_COST_PER_DAY="45" AP_APARTMENT_TYPE_ID="2" AP_CITY_ID="1" />
+    <apartments AP_ID="2" AP_NAME="Test1" AP_DESCRIPTION="Good apartment" AP_GUEST_COUNT="3" AP_COST_PER_DAY="35" AP_APARTMENT_TYPE_ID="1" AP_CITY_ID="2" />
 </dataset>

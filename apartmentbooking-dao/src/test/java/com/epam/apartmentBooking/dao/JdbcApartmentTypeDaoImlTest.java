@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class JdbcApartmentTypeDaoImlTest extends EntityDaoImplTest {
 
 	@Autowired
-	IApartmentTypeDao apartmentTypeDao;
+	private IApartmentTypeDao apartmentTypeDao;
 
 	@Override
 	protected IDataSet getDataSet() throws Exception {

@@ -14,7 +14,6 @@ import java.util.List;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -31,8 +30,7 @@ public class ApartmentServiceImplTest {
 	@InjectMocks
 	ApartmentServiceImpl apartmentService;
 
-	@Spy
-	List<Apartment> apartmentList = new ArrayList<Apartment>();
+	private List<Apartment> apartmentList = new ArrayList<Apartment>();
 
 	@BeforeClass
 	public void setUp() {
