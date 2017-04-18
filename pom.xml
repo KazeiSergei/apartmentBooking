@@ -9,6 +9,8 @@
 
 	<properties>
 		<springframework.version>4.2.3.RELEASE</springframework.version>
+		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+		<jdk.version>1.8</jdk.version>
 	</properties>
 
 	<dependencies>
