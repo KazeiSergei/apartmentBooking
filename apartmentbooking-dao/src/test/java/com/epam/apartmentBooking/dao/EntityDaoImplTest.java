@@ -1,6 +1,8 @@
+
 package com.epam.apartmentBooking.dao;
 
-import com.epam.apartmentBooking.configuration.BeenConfigTest;
+import javax.sql.DataSource;
+
 import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
@@ -10,19 +12,21 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 
-import javax.sql.DataSource;
+import com.epam.apartmentBooking.configuration.BeenConfigTest;
 
 @ContextConfiguration(classes = { BeenConfigTest.class })
 public abstract class EntityDaoImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
-    @Autowired
-    private DataSource dataSource;
+	@Autowired
+	private DataSource dataSource;
 
-    @BeforeMethod
-    public void setUp() throws Exception {
-        IDatabaseConnection dbConn = new DatabaseDataSourceConnection(dataSource);
-        DatabaseOperation.CLEAN_INSERT.execute(dbConn, getDataSet());
-    }
+	private static String userName = "C##TEST1";
 
-    protected abstract IDataSet getDataSet() throws Exception;
+	@BeforeMethod
+	public void setUp() throws Exception {
+		IDatabaseConnection dbConn = new DatabaseDataSourceConnection(dataSource, userName);
+		DatabaseOperation.CLEAN_INSERT.execute(dbConn, getDataSet());
+	}
+
+	protected abstract IDataSet getDataSet() throws Exception;
 }

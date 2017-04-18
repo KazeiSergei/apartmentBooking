@@ -21,8 +21,6 @@ public class JdbcApartmentDaoImpl implements IApartmentDao {
 	private static final String SQL_QUERY_DELETE_APARTMENT = "delete from APARTMENTS where AP_ID = :AP_ID";
 	private static final String SQL_QUERY_UPDATE_APARTMENT = "update APARTMENTS set AP_NAME = :AP_NAME,AP_DESCRIPTION = :AP_DESCRIPTION,AP_GUEST_COUNT = :AP_GUEST_COUNT,AP_COST_PER_DAY = :AP_COST_PER_DAY,AP_APARTMENT_TYPE_ID = :AP_APARTMENT_TYPE_ID,AP_CITY_ID = :AP_CITY_ID  where AP_ID = :AP_ID";
 	private static final String SQL_QUERY_FIND_APARTMENT_BY_ID = "select * from APARTMENTS where AP_ID = :AP_ID";
-	// private static final String SQL_QUERY_FIND_AVAILABLE_APARTMENT = "select
-	// * from APARTMENTS where AP_ID = :AP_ID";
 
 	private NamedParameterJdbcOperations namedParameterJdbcTemplate;
 
@@ -89,4 +87,5 @@ public class JdbcApartmentDaoImpl implements IApartmentDao {
 			return apartment;
 		}
 	}
+
 }

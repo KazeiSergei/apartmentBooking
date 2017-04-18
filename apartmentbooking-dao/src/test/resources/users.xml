@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <users USER_ID="2" USER_NAME="Anton" USER_SURNAME="Zaleski" USER_EMAIL="Zaleski@mail.ru" USER_PASSWORD="11111111" />
-    <users USER_ID="3" USER_NAME="Sergei" USER_SURNAME="Terton" USER_EMAIL="Terton@mail.ru" USER_PASSWORD="2222222" />
+    <users USER_ID="1" USER_NAME="Anton" USER_SURNAME="Zaleski" USER_EMAIL="Zaleski@mail.ru" USER_PASSWORD="11111111" />
+    <users USER_ID="2" USER_NAME="Sergei" USER_SURNAME="Terton" USER_EMAIL="Terton@mail.ru" USER_PASSWORD="2222222" />
 </dataset>

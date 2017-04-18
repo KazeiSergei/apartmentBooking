@@ -11,8 +11,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<jdk.version>1.6</jdk.version>
-		<maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+		<jdk.version>1.8</jdk.version>
 		<springframework.version>4.2.3.RELEASE</springframework.version>
 		<oracle.version>10.2.0.3.0</oracle.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
@@ -86,24 +85,6 @@
 			<version>1.2.0</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
 	</dependencies>
 	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
-				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
