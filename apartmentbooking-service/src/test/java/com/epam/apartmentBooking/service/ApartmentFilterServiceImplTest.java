@@ -10,7 +10,6 @@ import java.util.List;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -29,10 +28,9 @@ public class ApartmentFilterServiceImplTest {
 	@InjectMocks
 	ApartmentFilterServiceImpl apartmentFilterService;
 
-	@Spy
-	List<ApartmentFilter> apartmentFilters = new ArrayList<ApartmentFilter>();
-	Date checkIn = new Date();
-	Date checkOut = new Date();
+	private List<ApartmentFilter> apartmentFilters = new ArrayList<ApartmentFilter>();
+	private Date checkIn = new Date();
+	private Date checkOut = new Date();
 
 	@BeforeClass
 	public void setUp() {
